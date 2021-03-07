@@ -1,0 +1,20 @@
+.cardCont {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  .divider {
+    margin-top: 10px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+
+.muicardactionarea-root {
+  height: 100%;
+}
+
+@media only screen and (max-width: 1285px) {
+  .cardCont {
+    justify-content: space-around;
+  }
+}

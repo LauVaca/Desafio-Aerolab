@@ -1,0 +1,23 @@
+.containerSort {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  align-items: center;
+  margin-right: 2%;
+  margin-top: 15px;
+  .grupoB {
+    margin-left: 20px;
+    .btnSort {
+      padding-left: 20px;
+      padding-right: 20px;
+      border-color: #6ee8ff;
+    }
+  }
+}
+
+.containerCards {
+  margin-top: 25px;
+  margin-left: 8%;
+  margin-right: 8%;
+}
