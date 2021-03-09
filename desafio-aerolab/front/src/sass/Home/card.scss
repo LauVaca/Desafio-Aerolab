@@ -3,14 +3,88 @@
   flex-flow: row wrap;
   justify-content: space-between;
   .divider {
-    margin-top: 10px;
-    margin-left: 16px;
-    margin-right: 16px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 24px;
+    margin-right: 24px;
   }
 }
 
 .muicardactionarea-root {
   height: 100%;
+}
+
+.card {
+  width: 260px;
+  height: 270px;
+  margin-bottom: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: white;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+  box-shadow: 10px 10px 20px -10px rgba(0, 0, 0, 0.2);
+  .puntos {
+    width: 260px;
+    height: 270px;
+    position: absolute;
+    background-color: #18c6f5;
+    -webkit-transition: opacity 0.2s;
+    opacity: 0;
+    border-radius: 5px;
+  }
+  .cont {
+    opacity: 0;
+    width: 260px;
+    height: 270px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .costo {
+      display: flex;
+      text-align: center;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px;
+      color: white;
+    }
+    .btnReedem {
+      color: black;
+      text-align: center;
+      border-radius: 50px;
+      background: white;
+    }
+  }
+  .imgCard {
+    height: 170px;
+  }
+  .textCard-cat {
+    color: #b2b2b2;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+  .textCard-name {
+    color: #707070;
+    text-align: left;
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+}
+
+.card:hover .puntos {
+  opacity: 0.8;
+}
+
+.card:hover .cont {
+  position: absolute;
+  opacity: 1;
 }
 
 @media only screen and (max-width: 1285px) {

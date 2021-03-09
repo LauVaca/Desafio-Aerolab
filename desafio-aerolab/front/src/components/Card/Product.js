@@ -7,53 +7,76 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { ReactComponent as Coin } from '../../icons/coin.svg';
+import SvgIcon from '@material-ui/core/SvgIcon';
 import Divider from '@material-ui/core/Divider';
 
-const useStyles = makeStyles({
-  root: {
-    width: 260,
-    marginBottom: 25,
-    marginLeft: 5,
-    marginRight: 5,
-  },
-  media: {
-    height: 170,
-  },
-});
-
 function Product(props) {
-  const classes = useStyles();
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={props.url}
-          tittle={props.category}
-          alt={props.name}
-        />
-        <Divider className="divider" />
-        <CardContent>
-          <Typography
-            gutterBottom
-            style={{ color: '#b2b2b2', fontSize: 14 }}
-          >
-            {props.category}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            style={{ color: '#707070' }}
-          >
-            {props.name}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">{props.cost}</Button>
-        </CardActions>
-      </CardActionArea>
-    </Card>
+    <div className="card">
+      <div className="puntos"></div>
+      <div className="cont">
+        <div className="costo">
+          {props.cost}
+          <SvgIcon
+            style={{ marginLeft: 10 }}
+            component={Coin}
+            viewBox="0 0 30 30"
+          />
+        </div>
+        <Button
+          disableElevation
+          variant="contained"
+          className="btnReedem"
+        >
+          Reedem now
+        </Button>
+      </div>
+      <img className="imgCard" src={props.url} alt={props.name} />
+      <Divider className="divider" />
+      <Typography gutterBottom className="textCard-cat">
+        {props.category}
+      </Typography>
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        component="p"
+        className="textCard-name"
+      >
+        {props.name}
+      </Typography>
+    </div>
+
+    /* <Card className="card">
+        <CardActionArea>
+          <CardMedia
+            className="imgCard"
+            image={props.url}
+            tittle={props.category}
+            alt={props.name}
+          />
+          <Divider className="divider" />
+          <CardContent>
+            <Typography
+              gutterBottom
+              style={{ color: '#b2b2b2', fontSize: 14 }}
+            >
+              {props.category}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              style={{ color: '#707070' }}
+            >
+              {props.name}
+            </Typography>
+          </CardContent>
+          <CardActions className="puntos">
+            <Button size="small">{props.cost}</Button>
+          </CardActions>
+        </CardActionArea>
+      </Card> */
   );
 }
 export default Product;
