@@ -4,6 +4,13 @@ import electro from '../../icons/headerx2.png';
 import Button from '@material-ui/core/Button';
 import { ReactComponent as Coin } from '../../icons/coin.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import PerfilUsuario from './Perfil';
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+} from 'react-router-dom';
 
 function Header() {
   return (
@@ -11,7 +18,9 @@ function Header() {
       <div className="nav">
         <img alt="Aerolab" src={aero} className="img" />
         <div className="itemsbar">
-          <p>Usuario</p>
+          <Link to="/perfil">
+            <p>Usuario</p>
+          </Link>
           <Button
             variant="contained"
             endIcon={<SvgIcon component={Coin} viewBox="0 0 30 30" />}
@@ -20,14 +29,6 @@ function Header() {
             2500
           </Button>
         </div>
-      </div>
-      {/*    <div className="image">
-        <div className="textoimagen">Electronics</div>
-        <img alt="Electronics" src={electro} className="imgElectro" />
-      </div> */}
-      <div className="image">
-        <div className="textoimagen">Electronics</div>
-        <img alt="Electronics" src={electro} className="imgElectro" />
       </div>
     </div>
   );

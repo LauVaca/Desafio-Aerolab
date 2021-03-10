@@ -4,6 +4,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import './App.scss';
+import PerfilUsuario from './components/Header/Perfil';
 import Home from './components/Home/Home';
 
 function App() {
@@ -14,6 +15,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/perfil">
+              <PerfilUsuario />
             </Route>
           </Switch>
         </div>

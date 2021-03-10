@@ -10,10 +10,13 @@ import Button from '@material-ui/core/Button';
 import { ReactComponent as Coin } from '../../icons/coin.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Divider from '@material-ui/core/Divider';
+import Fab from '@material-ui/core/Fab';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
+import Icon from '@material-ui/core/Icon';
 
 function Product(props) {
   return (
-    <div className="card">
+    <div className="card hvr-grow-shadow">
       <div className="puntos"></div>
       <div className="cont">
         <div className="costo">
@@ -31,6 +34,11 @@ function Product(props) {
         >
           Reedem now
         </Button>
+      </div>
+      <div className="btn">
+        <Fab size="small" className="btnPuntos">
+          <LocalMallIcon />
+        </Fab>
       </div>
       <img className="imgCard" src={props.url} alt={props.name} />
       <Divider className="divider" />
