@@ -27,7 +27,7 @@ function ProductList() {
 
   if (!cards) {
     return (
-      <div className="cardCont">
+      <div className="progressBar">
         <CircularProgress color="secondary" />
       </div>
     );

@@ -1,0 +1,49 @@
+.rowCol {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.containerPerfil {
+  margin-left: 20%;
+  margin-right: 20%;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 40px;
+  padding-bottom: 20px;
+  .containerDatos {
+    margin-left: 50px;
+    margin-right: 50px;
+    .tituloPerfil {
+      font-size: 22px;
+      font-weight: bold;
+      color: orangered;
+      padding-top: 40px;
+    }
+    .subtitulo {
+      color: #707070;
+    }
+    .dividerPerfil {
+      background-color: #ffc6b1;
+      margin-right: 50px;
+    }
+    .dato {
+      color: #424242;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.makeStyles-formControl-1 {
+  margin: 0px !important;
+  min-width: 120px;
+}
+
+.MuiFormLabel-root.Mui-focused {
+  color: #707070 !important;
+}
+
+.MuiInputLabel-formControl {
+  font-size: 18px !important;
+}

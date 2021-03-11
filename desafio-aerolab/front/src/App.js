@@ -4,12 +4,13 @@ import {
   Switch,
 } from 'react-router-dom';
 import './App.scss';
-import PerfilUsuario from './components/Header/Perfil';
 import Home from './components/Home/Home';
+import PerfilUsuario from './components/Profile/Perfil';
+import PerfilHome from './components/Profile/Perfil-home';
 
 function App() {
   return (
-    <div style={{ backgroundColor: '#f4f4f4' }}>
+    <div className="App">
       <Router>
         <div>
           <Switch>
@@ -17,6 +18,9 @@ function App() {
               <Home />
             </Route>
             <Route exact path="/perfil">
+              <PerfilHome />
+            </Route>
+            <Route exact path="/perfilusuario">
               <PerfilUsuario />
             </Route>
           </Switch>
