@@ -10,7 +10,6 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
     minWidth: 120,
   },
   selectEmpty: {
@@ -23,20 +22,67 @@ const TOKEN =
 
 function PerfilUsuario(props) {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    point: '',
-    name: '',
-  });
-
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setState({
-      ...state,
-      [name]: event.target.value,
-    });
-  };
 
   const [profile, setProfile] = useState(null);
+  const [respuesta, setRespuesta] = useState(null);
+
+  const handleSubmit1 = (event, value) => {
+    event.preventDefault();
+    const puntos = { amount: 1000 };
+    const postData = async () => {
+      try {
+        const response = await axios.post(
+          `https://coding-challenge-api.aerolab.co/user/points?token=${TOKEN}`,
+          puntos,
+        );
+        setRespuesta(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    postData();
+  };
+
+  const handleSubmit5 = (event, value) => {
+    event.preventDefault();
+
+    const puntos = { amount: 5000 };
+
+    const postData = async () => {
+      try {
+        const response = await axios.post(
+          `https://coding-challenge-api.aerolab.co/user/points?token=${TOKEN}`,
+          puntos,
+        );
+        setRespuesta(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    postData();
+  };
+
+  const handleSubmit75 = (event, value) => {
+    event.preventDefault();
+
+    const puntos = { amount: 7500 };
+
+    const postData = async () => {
+      try {
+        const response = await axios.post(
+          `https://coding-challenge-api.aerolab.co/user/points?token=${TOKEN}`,
+          puntos,
+        );
+        setRespuesta(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    postData();
+  };
+
   useEffect(() => {
     const fectchData = async () => {
       try {
@@ -52,7 +98,7 @@ function PerfilUsuario(props) {
     };
 
     fectchData();
-  }, []);
+  }, [respuesta]);
 
   if (!profile) {
     return (
@@ -63,56 +109,50 @@ function PerfilUsuario(props) {
   }
   return (
     <div>
-      <Header />
+      <Header profile={profile} setRespuesta={setRespuesta} />
       <div>
         <div className="containerPerfil">
           <div className="containerDatos">
-            <p className="tituloPerfil">Información personal</p>
-            <p className="subtitulo">Nombre y Apellido</p>
+            <p className="tituloPerfil">Personal information</p>
+            <p className="subtitulo">Name and Surname</p>
             <p className="dato">{profile.name}</p>
           </div>
         </div>
         <div className="containerPerfil">
           <div className="containerDatos">
-            <p className="tituloPerfil">Mis puntos</p>
-            <p className="subtitulo">Cantidad de puntos</p>
-            <p className="dato">{profile.points} puntos</p>
-
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="point">Sumar puntos</InputLabel>
-              <Select
-                native
-                value={state.point}
-                onChange={handleChange}
-                inputProps={{
-                  name: 'point',
-                  id: 'point-id',
-                }}
-              >
-                <option value={1000}>1000</option>
-                <option value={5000}>5000</option>
-                <option value={7500}>7500</option>
-              </Select>
-            </FormControl>
+            <p className="tituloPerfil">My points</p>
+            <p className="subtitulo">Current amount of points</p>
+            <p className="dato">{profile.points} points</p>
             <Button
               variant="contained"
-              style={{
-                backgroundColor: 'orangered',
-                color: 'white',
-                boxShadow: 'none',
-                marginTop: 20,
-                marginLeft: 10,
-              }}
+              onClick={handleSubmit1}
+              className="btnAddPoints"
             >
-              Sumar
+              +1000 points
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleSubmit5}
+              className="btnAddPoints"
+            >
+              +5000 points
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleSubmit75}
+              className="btnAddPoints"
+            >
+              +7500 points
             </Button>
           </div>
         </div>
         <div className="containerPerfil">
           <div className="containerDatos">
-            <p className="tituloPerfil">Historial de puntos</p>
+            <p className="tituloPerfil">History of redeemed points</p>
             {profile.redeemHistory == '' ? (
-              <p className="dato">Aún no se canjearon puntos</p>
+              <p className="dato">
+                You don't have redeemed points yet
+              </p>
             ) : (
               <p className="dato">{profile.redeemHistory}</p>
             )}

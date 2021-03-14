@@ -6,26 +6,34 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDQwMWNiNTdlNzE4NzAwMjBlMzhmM2UiLCJpYXQiOjE2MTQ4MTQzODl9.y01QnX7nVE9j3ig0I8sujMsLriEJ7A_RV-9pJlmFnxg';
 
-function ProductList() {
-  const [cards, setCards] = useState(null);
+function ProductList(props) {
+  const [cardsPage, setCardsPage] = useState([]);
+
   useEffect(() => {
     const fectchData = async () => {
       try {
         const { data } = await axios.get(
           `https://coding-challenge-api.aerolab.co/products?token=${TOKEN}`,
         );
-        setCards(data);
+        props.setCards(data);
+        props.setCount(Math.ceil(props.cards.length / 16));
       } catch (err) {
         console.log(err);
       }
-
-      console.log(cards);
+      console.log(props.cards);
     };
-
     fectchData();
-  }, []);
+  }, [props.count]);
 
-  if (!cards) {
+  useEffect(() => {
+    if (props.cards.length > 0) {
+      setCardsPage(
+        props.cards.slice(props.inferior, props.superior + 1),
+      );
+    }
+  }, [props.cards, props.inferior]);
+
+  if (props.cards.length < 0) {
     return (
       <div className="progressBar">
         <CircularProgress color="secondary" />
@@ -35,7 +43,7 @@ function ProductList() {
 
   return (
     <div className="cardCont">
-      {cards.map((card) => {
+      {cardsPage.map((card) => {
         return (
           <Product
             url={card.img.url}
