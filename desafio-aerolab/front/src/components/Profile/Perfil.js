@@ -121,15 +121,16 @@ function PerfilUsuario(props) {
         <div className="containerPerfil">
           <div className="containerDatos">
             <p className="tituloPerfil">Personal information</p>
-            <p className="subtitulo">Name and Surname</p>
+            <p className="subtitulo">Name and Surname:</p>
             <p className="dato">{profile.name}</p>
           </div>
         </div>
         <div className="containerPerfil">
           <div className="containerDatos">
             <p className="tituloPerfil">My points</p>
-            <p className="subtitulo">Current amount of points</p>
+            <p className="subtitulo">Current amount of points:</p>
             <p className="dato">{profile.points} points</p>
+            <p className="subtitulo">Add more points to your user:</p>
             <Button
               variant="contained"
               onClick={handleSubmit1}
