@@ -34,16 +34,24 @@
       }
       .btnPuntos {
         margin-left: 25px;
+        display: flex;
+        flex-direction: row;
         height: fit-content;
+        padding: 5px 12px;
         border-radius: 25px;
         box-shadow: none;
         background-color: #ff4f00;
         color: white;
+        .coinIcon{
+          margin-left: 8px;
+        }
       }
     }
   }
 }
-.image {
+
+/////category image
+/* .image {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -56,26 +64,45 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 64px;
     text-align: left;
-    margin-left: 10%;
+    margin-left: 8%;
     align-self: flex-end;
     margin-bottom: 2%;
   }
-
-  /* .image {
+ */
+ .image {
     position: relative;
     display: inline-block;
     .textoimagen {
       position: absolute;
       font-weight: bold;
       color: white;
-      margin-left: 10%;
+      margin-left: 8%;
       font-family: 'Source Sans Pro', sans-serif;
-      font-size: 64px;
+      font-size: 60px;
       text-align: left;
-      bottom: 40px;
+      margin-left: 8%;
+      align-self: flex-end;
+      bottom: 12%;
     }
     .imgElectro {
       height: 100%;
       width: 100%;
-    } */
+    } 
 }
+
+@media only screen and (max-width: 819px) {
+  .image {
+    .textoimagen {
+      font-size: 50px;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .image {
+    .textoimagen {
+      font-size: 40px;
+    }
+  }
+}
+

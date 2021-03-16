@@ -2,29 +2,54 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Header from '../Header/Header';
-import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
+import HistoryTable from './Historial';
 
 const TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDQwMWNiNTdlNzE4NzAwMjBlMzhmM2UiLCJpYXQiOjE2MTQ4MTQzODl9.y01QnX7nVE9j3ig0I8sujMsLriEJ7A_RV-9pJlmFnxg';
 
 function PerfilUsuario(props) {
-  const classes = useStyles();
-
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState('');
   const [respuesta, setRespuesta] = useState(null);
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    const fectchData = async () => {
+      try {
+        const { historial } = await axios.get(
+          `https://coding-challenge-api.aerolab.co/user/history?token=${TOKEN}`,
+        );
+        setHistory(historial);
+      } catch (err) {
+        console.log(err);
+      }
+      console.log(history);
+    };
+
+    fectchData();
+  }, []);
+
+  useEffect(() => {
+    const fectchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://coding-challenge-api.aerolab.co/user/me?token=${TOKEN}`,
+        );
+        const { historial } = await axios.get(
+          `https://coding-challenge-api.aerolab.co/user/history?token=${TOKEN}`,
+        );
+        setProfile(data);
+        setHistory(historial);
+      } catch (err) {
+        console.log(err);
+      }
+
+      console.log(profile);
+      console.log(history);
+    };
+
+    fectchData();
+  }, [respuesta]);
 
   const handleSubmit1 = (event, value) => {
     event.preventDefault();
@@ -59,7 +84,6 @@ function PerfilUsuario(props) {
         console.log(err);
       }
     };
-
     postData();
   };
 
@@ -79,31 +103,14 @@ function PerfilUsuario(props) {
         console.log(err);
       }
     };
-
     postData();
   };
-
-  useEffect(() => {
-    const fectchData = async () => {
-      try {
-        const { data } = await axios.get(
-          `https://coding-challenge-api.aerolab.co/user/me?token=${TOKEN}`,
-        );
-        setProfile(data);
-      } catch (err) {
-        console.log(err);
-      }
-
-      console.log(profile);
-    };
-
-    fectchData();
-  }, [respuesta]);
 
   if (!profile) {
     return (
       <div className="progressBar">
-        <CircularProgress color="secondary" />
+        <CircularProgress className="colorProgress" />
+        <p>Cargando...</p>
       </div>
     );
   }
@@ -149,27 +156,11 @@ function PerfilUsuario(props) {
         <div className="containerPerfil">
           <div className="containerDatos">
             <p className="tituloPerfil">History of redeemed points</p>
-            {profile.redeemHistory == '' ? (
-              <p className="dato">
-                You don't have redeemed points yet
-              </p>
-            ) : (
-              <p className="dato">{profile.redeemHistory}</p>
-            )}
+            <HistoryTable datatable={profile.redeemHistory} />
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-// {
-//   "_id": "60401cb57e71870020e38f3e",
-//   "name": "John Kite",
-//   "points": 4000,
-//   "createDate": "2021-03-03T23:33:09.797Z",
-//   "redeemHistory": [],
-//   "__v": 0
-// }
-
 export default PerfilUsuario;

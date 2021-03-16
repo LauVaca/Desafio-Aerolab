@@ -15,7 +15,7 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route exact path="/perfilusuario">
+            <Route exact path="/profile">
               <PerfilUsuario />
             </Route>
           </Switch>

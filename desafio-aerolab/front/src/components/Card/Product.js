@@ -1,10 +1,5 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { ReactComponent as Coin } from '../../icons/coin.svg';
@@ -12,9 +7,52 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import Divider from '@material-ui/core/Divider';
 import Fab from '@material-ui/core/Fab';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
-import Icon from '@material-ui/core/Icon';
+
+const TOKEN =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDQwMWNiNTdlNzE4NzAwMjBlMzhmM2UiLCJpYXQiOjE2MTQ4MTQzODl9.y01QnX7nVE9j3ig0I8sujMsLriEJ7A_RV-9pJlmFnxg';
 
 function Product(props) {
+  const handleRedeem = (event, value) => {
+    event.preventDefault();
+
+    const canje = { productId: props.id };
+
+    const postRedeem = async () => {
+      try {
+        const response = await axios.post(
+          `https://coding-challenge-api.aerolab.co/redeem?token=${TOKEN}`,
+          canje,
+        );
+        props.setRespuesta(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (props.profile.points > props.cost) {
+      postRedeem();
+    } else {
+      props.setOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    const fectchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://coding-challenge-api.aerolab.co/user/me?token=${TOKEN}`,
+        );
+        props.setProfile(data);
+      } catch (err) {
+        console.log(err);
+      }
+      console.log(props.profile);
+    };
+
+    fectchData();
+  }, [props.respuesta]);
+
+  let resta = props.cost - props.profile.points;
+
   return (
     <div className="card hvr-grow-shadow">
       <div className="puntos"></div>
@@ -31,14 +69,25 @@ function Product(props) {
           disableElevation
           variant="contained"
           className="btnReedem"
+          onClick={handleRedeem}
         >
           Reedem now
         </Button>
       </div>
       <div className="btn">
-        <Fab size="small" className="btnPuntos">
-          <LocalMallIcon />
-        </Fab>
+        {props.profile.points >= props.cost ? (
+          <Fab size="small" className="btnPuntos">
+            <LocalMallIcon />
+          </Fab>
+        ) : (
+          <Button
+            variant="contained"
+            className="btnPuntosResta"
+            endIcon={<SvgIcon component={Coin} viewBox="0 0 30 30" />}
+          >
+            You need {resta}
+          </Button>
+        )}
       </div>
       <img className="imgCard" src={props.url} alt={props.name} />
       <Divider className="divider" />
@@ -54,37 +103,6 @@ function Product(props) {
         {props.name}
       </Typography>
     </div>
-
-    /* <Card className="card">
-        <CardActionArea>
-          <CardMedia
-            className="imgCard"
-            image={props.url}
-            tittle={props.category}
-            alt={props.name}
-          />
-          <Divider className="divider" />
-          <CardContent>
-            <Typography
-              gutterBottom
-              style={{ color: '#b2b2b2', fontSize: 14 }}
-            >
-              {props.category}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              style={{ color: '#707070' }}
-            >
-              {props.name}
-            </Typography>
-          </CardContent>
-          <CardActions className="puntos">
-            <Button size="small">{props.cost}</Button>
-          </CardActions>
-        </CardActionArea>
-      </Card> */
   );
 }
 export default Product;

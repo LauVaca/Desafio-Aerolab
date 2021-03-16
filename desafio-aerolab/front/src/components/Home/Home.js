@@ -6,6 +6,9 @@ import ProductList from '../Card/ProductList';
 import Categoria from '../Header/Categoria';
 import Pagination from '@material-ui/lab/Pagination';
 import axios from 'axios';
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDQwMWNiNTdlNzE4NzAwMjBlMzhmM2UiLCJpYXQiOjE2MTQ4MTQzODl9.y01QnX7nVE9j3ig0I8sujMsLriEJ7A_RV-9pJlmFnxg';
@@ -16,8 +19,16 @@ function Home(props) {
   const [count, setCount] = useState();
   const [inferior, setInferior] = useState(0);
   const [superior, setSuperior] = useState(15);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState('');
   const [cards, setCards] = useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   const handleChangePage = (event, value) => {
     setPage(value);
@@ -35,32 +46,20 @@ function Home(props) {
       } catch (err) {
         console.log(err);
       }
-
       console.log(profile);
     };
 
     fectchData();
   }, []);
 
-  function compare(a, b) {
-    if (a.cost < b.cost) {
-      return -1;
-    }
-    if (a.cost > b.cost) {
-      return 1;
-    }
-    return 0;
-  }
-
-  // utilizo useEffect para ejecutar este código sólo una vez
-  useEffect(() => {
-    // copio la lista con [...list] y la ordeno con sort()
-    const sortedList = [...cards].sort((a, b) =>
-      a.cost > b.cost ? 1 : a.cost < b.cost ? -1 : 0,
+  if (!profile) {
+    return (
+      <div className="progressBar">
+        <CircularProgress className="colorProgress" />
+        <p>Cargando...</p>
+      </div>
     );
-    // actualizo el estado con la nueva lista ya ordenada
-    setCards(sortedList);
-  }, []);
+  }
 
   return (
     <div>
@@ -134,7 +133,31 @@ function Home(props) {
           setCount={setCount}
           inferior={inferior}
           superior={superior}
+          setProfile={setProfile}
+          respuesta={respuesta}
+          setRespuesta={setRespuesta}
+          profile={profile}
+          setOpen={setOpen}
         />
+      </div>
+      <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          open={open}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert
+            variant="filled"
+            severity="error"
+            onClose={handleClose}
+          >
+            You don't have enough points for this product.
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );

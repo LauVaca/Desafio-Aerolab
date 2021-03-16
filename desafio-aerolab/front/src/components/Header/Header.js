@@ -1,6 +1,5 @@
 import React from 'react';
 import aero from '../../icons/aero.png';
-import Button from '@material-ui/core/Button';
 import { ReactComponent as Coin } from '../../icons/coin.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
@@ -19,21 +18,17 @@ function Header(props) {
         </div>
 
         <div className="itemsbar">
-          <Link
-            to={{
-              pathname: 'perfilusuario',
-            }}
-            className="link"
-          >
+          <Link to="profile" className="link">
             <p>{props.profile.name}</p>
           </Link>
-          <Button
-            variant="contained"
-            endIcon={<SvgIcon component={Coin} viewBox="0 0 30 30" />}
-            className="btnPuntos"
-          >
+          <div className="btnPuntos">
             {props.profile.points}
-          </Button>
+            <SvgIcon
+              className="coinIcon"
+              component={Coin}
+              viewBox="0 0 30 30"
+            />
+          </div>
         </div>
       </div>
     </div>

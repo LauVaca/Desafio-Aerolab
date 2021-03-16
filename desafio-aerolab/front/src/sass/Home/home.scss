@@ -1,11 +1,11 @@
 .containerFiltros {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: space-between;
   align-content: center;
   align-items: center;
-  margin-right: 7%;
-  margin-left: 7%;
+  margin-right: 8%;
+  margin-left: 8%;
   margin-top: 20px;
   margin-bottom: 20px;
   .sort {
@@ -14,7 +14,7 @@
     justify-content: flex-end;
     align-content: center;
     align-items: center;
-    margin-right: 2%;
+    margin-left: 10px;
     .grupoB {
       margin-left: 20px;
       .btnSort {
@@ -31,3 +31,6 @@
   margin-left: 8%;
   margin-right: 8%;
 }
+
+
+

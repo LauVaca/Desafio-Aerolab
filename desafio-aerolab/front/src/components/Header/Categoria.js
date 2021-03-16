@@ -1,5 +1,5 @@
 import React from 'react';
-import electro from '../../icons/headerx22.png';
+import electro from '../../icons/header.png';
 
 function Categoria() {
   return (

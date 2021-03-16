@@ -36,7 +36,8 @@ function ProductList(props) {
   if (props.cards.length < 0) {
     return (
       <div className="progressBar">
-        <CircularProgress color="secondary" />
+        <CircularProgress className="colorProgress" />
+        <p>Cargando...</p>
       </div>
     );
   }
@@ -46,10 +47,16 @@ function ProductList(props) {
       {cardsPage.map((card) => {
         return (
           <Product
+            id={card._id}
             url={card.img.url}
             name={card.name}
             category={card.category}
             cost={card.cost}
+            setProfile={props.setProfile}
+            setRespuesta={props.setRespuesta}
+            profile={props.profile}
+            respuesta={props.respuesta}
+            setOpen={props.setOpen}
           />
         );
       })}

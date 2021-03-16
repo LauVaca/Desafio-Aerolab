@@ -77,6 +77,13 @@
       color: white;
       box-shadow: none;
     }
+    .btnPuntosResta{
+      background-color: #f0f0f0;
+      color: #555555;
+      box-shadow: none;
+      width: 180px;
+      border-radius: 50px;
+    }
   }
 
   .imgCard {
@@ -107,14 +114,28 @@
   opacity: 1;
 }
 
-.card:hover .btnPuntos {
+.card:hover .btnPuntos  {
   background-color: white;
   color: #0ad4fa;
   box-shadow: none;
   //color: white;
 }
 
-.card:hover .btnPuntos:active {
+.card:hover .btnPuntos:active  {
+  background-color: lightgray;
+  color: #0ad4fa;
+  box-shadow: none;
+  //color: white;
+}
+
+.card:hover .btnPuntosResta  {
+  background-color: white;
+  color: #0ad4fa;
+  box-shadow: none;
+  //color: white;
+}
+
+.card:hover .btnPuntosResta:active  {
   background-color: lightgray;
   color: #0ad4fa;
   box-shadow: none;

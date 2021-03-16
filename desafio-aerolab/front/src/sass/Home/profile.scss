@@ -33,11 +33,28 @@
       margin-bottom: 20px;
     }
     .btnAddPoints {
-      background-color: orangered;
+      background-color: #ff4500;
       color: white;
       box-shadow: none;
       margin-right: 10px;
+      margin-top: 5px;
     }
+    .historial{
+      display: flex;
+      flex-direction: row;
+      .name{
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.progressBar{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  .colorProgress{
+    color: orangered !important;
   }
 }
 
