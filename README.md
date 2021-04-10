@@ -33,6 +33,4 @@ $npm install
 ```bash
 $npm start
 ```
-```bash
-http://lauchallenges.surge.sh/
- ```
+[Ver challenge](http://lauchallenges.surge.sh/)
