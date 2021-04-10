@@ -1,6 +1,7 @@
 ![GitHub Logo](https://github.com/LauVaca/Desafio-Aerolab/blob/main/desafio-aerolab/front/public/aerolab-logo.svg) 
 # Desafio-Aerolab
 Se debe crear una tienda de productos en donde las personas usuarias puedan canjear sus puntos por determinados productos.
+[Ir a la tienda](http://lauchallenges.surge.sh/)
 
 ## Definición funcional
 
@@ -33,4 +34,3 @@ $npm install
 ```bash
 $npm start
 ```
-[Ver challenge](http://lauchallenges.surge.sh/)
